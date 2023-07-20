@@ -15,7 +15,9 @@ import java.util.ArrayList;
 public class SecondActivity extends AppCompatActivity {
 
     ListView songsLv;
-    ArrayAdapter<Song> adapter;
+    ArrayList<Song> songs = new ArrayList();
+    CustomAdapter adapter;
+    //ArrayAdapter<Song> adapter;
     DBHelper db;
     Button btn5stars;
 
@@ -26,8 +28,8 @@ public class SecondActivity extends AppCompatActivity {
 
         songsLv = findViewById(R.id.songsLv);
         btn5stars = findViewById(R.id.btn5stars);
-        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1);
-        songsLv.setAdapter(adapter);
+
+
 
         DBHelper dbHelper = new DBHelper(this);
         db = dbHelper; // Initialize the db object with dbHelper
@@ -35,7 +37,7 @@ public class SecondActivity extends AppCompatActivity {
         ArrayList<Song> songs = db.getSongs();
 
         // Create an ArrayAdapter or custom adapter to link the songs data to the ListView
-        ArrayAdapter<Song> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, songs);
+        adapter = new CustomAdapter(this, R.layout.row, songs);
 
         // Set the adapter to the ListView
         songsLv.setAdapter(adapter);
